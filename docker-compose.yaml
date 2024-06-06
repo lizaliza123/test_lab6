@@ -1,0 +1,19 @@
+version: '3.9'
+name: lab4_5rysakov
+services:
+  nginx:
+    build:
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+  watchtower:
+    container_name: watchtower
+    image: containrrr/watchtower
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - TZ=$TZ
+      - WATCHTOWER_CLEANUP=true                                        
+      - WATCHTOWER_INCLUDE_RESTARTING=true
+      - WATCHTOWER_POLL_INTERVAL=36000
